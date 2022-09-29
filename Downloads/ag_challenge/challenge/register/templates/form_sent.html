@@ -1,0 +1,30 @@
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/alerts.css' %}">
+<body>
+    <!-- Traemos a la librería sweetalert2 y según el contexto de views.py 
+    indicamos el mensaje de éxito o de formulario fallido. -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.34/dist/sweetalert2.all.min.js"></script>
+    {% if applicant %}
+        <script>
+            Swal.fire({
+                title: '{{ applicant }}, gracias por tu interés',
+                text: 'Nos estaremos comunicando contigo por el correo que nos has proporcionado',
+                confirmButtonColor: '#02363D'
+            })
+        </script>
+    {% else %}
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: '{{ title }}',
+                text: '{{ text }}',
+                showConfirmButton: false,
+                footer: `<a href="{% url 'index' %}">Por favor vuelve a intentarlo</a>`
+            })
+        </script>
+    {% endif %}
+</body>
+
+{% endblock %}
