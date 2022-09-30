@@ -1,0 +1,43 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Lista</title>
+</head>
+<body>
+    <header>
+        <h1>Lista de invitados</h1>
+    </header>
+    <table>
+        <tr>
+            <td><b>Nombre</b></td>
+            <td><b>Apellido</b></td>
+            <td><b>Puesto de trabajo</b></td>
+            <td><b>Correo</b></td>
+        </tr>
+
+        <!-- Recorremos los registros de la base de 
+        datos y, si el campo 'Applicants.invite' es 
+        'True', lo mostramos en la tabla html -->
+        
+        {% for i in invited %}
+            {% if i.invite == True %}
+            <tr>
+                <td>{{ i.first_name }}</td>
+                <td>{{ i.last_name }}</td>
+                <td>{{ i.position }}</td>
+                <td>{{ i.email }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
+
+{% endblock %}
